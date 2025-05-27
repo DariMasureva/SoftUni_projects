@@ -9,11 +9,17 @@ player_guess = -1
 
 while player_guess != computer_number:
 
-    player_guess = int(input("your guess: "))
+    player_guess = input("your guess: ")
 
     if total_guesses == 0:
         print("just stop cheating and play the game")
         break
+
+    if not player_guess.isdigit():
+        print("do you even know what a number is? let's try again")
+        continue
+    else:
+        player_guess = int(player_guess)
 
     if player_guess - computer_number > 70:
         print("WAYY TOO HIGH")
