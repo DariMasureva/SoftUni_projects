@@ -19,7 +19,7 @@ if player_move in "rock paper scissors":
         print("YOU WON!")
 
     else:
-        print("you lost... against a computer...")
+        print("you lost... against a computer...shame on you")
 
 else:
     print("invalid input, run again to play")
