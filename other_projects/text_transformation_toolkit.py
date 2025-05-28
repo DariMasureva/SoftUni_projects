@@ -21,7 +21,6 @@ text = input("Enter the text: ")
 
 # Step 4: Apply the selected transformation
 if choice == 1:
-    # TODO: Reverse the text using slicing or a loop
 
     initial_text_list = list(text)
     reversed_text = []
@@ -32,19 +31,16 @@ if choice == 1:
     print("".join(reversed_text))
 
 elif choice == 2:
-    # TODO: Convert the text to uppercase using string methods
 
     text.upper()
     print(text)
 
 elif choice == 3:
-    # TODO: Convert the text to lowercase using string methods
 
     text.lower()
     print(text)
 
 elif choice == 4:
-    # TODO: Convert the text to title case (capitalize each word)
 
     text.split()
     initial_text_list = list(text)
@@ -59,7 +55,6 @@ elif choice == 4:
     print(capitalized_text_list)
 
 elif choice == 5:
-    # TODO: Count how many vowels are in the text (a, e, i, o, u)
 
     vowel_str = "aeiou"
     text.lower()
@@ -72,14 +67,12 @@ elif choice == 5:
     print(vowels_found)
 
 elif choice == 6:
-    # TODO: Remove all spaces from the string using replace() or join()
 
     text.replace(" ", "")
 
     print(text)
 
 elif choice == 7:
-    # TODO: Replace all vowels with "*" using a loop or comprehension
 
     vowel_str = "aeiou"
     initial_text_list = list(text.lower())
@@ -88,7 +81,6 @@ elif choice == 7:
     print("".join(replaced_vowels_list))
 
 elif choice == 8:
-    # TODO: Check if the text is a palindrome (ignoring case and spaces)
 
     initial_text_list = list(text.lower())
     formatted = "".join([char for char in initial_text_list if char != " "])
@@ -103,7 +95,6 @@ elif choice == 8:
         print(f"{text} is not a palindrome")
 
 elif choice == 9:
-    # TODO: Count the frequency of each word and display the result
 
     text.split()
     counter_list = []
