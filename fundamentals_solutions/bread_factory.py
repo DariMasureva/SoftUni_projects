@@ -18,7 +18,7 @@ for event in events:
         print(f"Current energy: {energy}.")
 
     elif task == "order":
-        if energy >= value:
+        if energy >= 30:
             coins += value
             energy -= 30
             print(f"You earned {value} coins.")
