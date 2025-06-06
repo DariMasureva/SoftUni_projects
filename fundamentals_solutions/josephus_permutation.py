@@ -1,30 +1,20 @@
 initial_circle = input().split()
-skip_count = int(input())
-if skip_count > 0:
-    skip_count -= 1
-elif skip_count < 0:
-    initial_circle = initial_circle[::-1]
-    skip_count *= -1
+skip_count = int(input()) - 1
 
 execution_list = []
-list_length = len(initial_circle)
 idx = skip_count
 
 while initial_circle:
-
-    while idx >= list_length and initial_circle:
-        idx -= list_length
-
-    execution_list.append(initial_circle[idx])
-    initial_circle.remove(initial_circle[idx])
     list_length = len(initial_circle)
 
-    if idx + skip_count > list_length:
-        elements_left = list_length - idx
-        idx = skip_count - elements_left
+    # this is to make sure k is less than the list length at all times
+    if idx >= list_length and initial_circle:
+        idx %= list_length
 
-    else:
-        idx += skip_count
+    executed = initial_circle.pop(idx)
+    execution_list.append(executed)
 
-final_str = ",".join(execution_list)
-print(f"[{final_str}]")
+    idx += skip_count
+
+formatted_execution_list = ",".join(execution_list)
+print(f"[{formatted_execution_list}]")
