@@ -8,15 +8,15 @@ while command != "end":
     command = command.split()
 
     if command[0] == "exchange":
-        split_idx = int(command[1]) + 1
+        split_idx = int(command[1])
 
-        if split_idx > len(list_of_numbers) or split_idx - 1 < 0:
+        if split_idx > len(list_of_numbers) or split_idx < 0:
             print("Invalid index")
             command = input()
             continue
 
-        first_half = list_of_numbers[:split_idx]
-        del list_of_numbers[:split_idx]
+        first_half = list_of_numbers[:split_idx + 1]
+        del list_of_numbers[:split_idx + 1]
 
         for number in first_half:
             list_of_numbers.append(number)
@@ -35,7 +35,7 @@ while command != "end":
             continue
 
         if max_value_count > 1:
-            max_idx = len(list_of_numbers) - list_of_numbers[::-1].index(max_value)
+            max_idx = len(list_of_numbers) - list_of_numbers[::-1].index(max_value) - 1
         else:
             max_idx = list_of_numbers.index(max_value)
 
@@ -55,7 +55,7 @@ while command != "end":
             continue
 
         if min_value_count > 1:
-            min_idx = len(list_of_numbers) - list_of_numbers[::-1].index(min_value)
+            min_idx = len(list_of_numbers) - list_of_numbers[::-1].index(min_value) - 1
         else:
             min_idx = list_of_numbers.index(min_value)
 
@@ -86,7 +86,7 @@ while command != "end":
             else:
                 firsts = odds
 
-        elif (command[2] == "odd" and not odds) or (command[2] == "even" and not evens):
+        elif command[2] == "odd" or command[2] == "even":
             print("[]")
             command = input()
             continue
@@ -120,7 +120,7 @@ while command != "end":
             else:
                 lasts = odds
 
-        elif (command[2] == "odd" and not odds) or (command[2] == "even" and not evens):
+        elif command[2] == "odd" or command[2] == "even":
             print("[]")
             command = input()
             continue
