@@ -10,7 +10,7 @@ while command != "end":
     if command[0] == "exchange":
         split_idx = int(command[1])
 
-        if split_idx > len(list_of_numbers) or split_idx < 0:
+        if split_idx >= len(list_of_numbers) or split_idx < 0:
             print("Invalid index")
             command = input()
             continue
