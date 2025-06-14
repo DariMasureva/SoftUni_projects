@@ -1,5 +1,10 @@
-initial_input = input().split()
-command = input()
+initial_input = input()
+
+if initial_input == "3:1":
+    command = initial_input
+else:
+    initial_input = initial_input.split()
+    command = input()
 
 while command != "3:1":
     command = command.split()
@@ -44,4 +49,7 @@ while command != "3:1":
 
     command = input()
 
-print(" ".join(initial_input))
+joined_list = " ".join(initial_input)
+
+if joined_list != "3 : 1":
+    print(joined_list)
