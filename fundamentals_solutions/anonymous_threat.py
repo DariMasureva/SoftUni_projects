@@ -1,10 +1,5 @@
-initial_input = input()
-
-if initial_input == "3:1":
-    command = initial_input
-else:
-    initial_input = initial_input.split()
-    command = input()
+initial_input = input().split()
+command = input()
 
 while command != "3:1":
     command = command.split()
@@ -14,17 +9,22 @@ while command != "3:1":
         start_idx = int(command[1])
         end_idx = int(command[2])
 
-        if start_idx > length - 1:
-            command = input()
-            continue
-        elif start_idx < - length:
-            start_idx = - length
+        if start_idx < 0:
+            start_idx = max(length + start_idx, 0)
+        if end_idx < 0:
+            end_idx = max(length + end_idx, 0)
 
-        if end_idx > length - 1:
-            end_idx = length - 1
-        elif end_idx < - length:
-            command = input()
-            continue
+        # if start_idx > length - 1:
+        #     command = input()
+        #     continue
+        # elif start_idx < - length:
+        #     start_idx = - length
+        #
+        # if end_idx > length - 1:
+        #     end_idx = length - 1
+        # elif end_idx < - length:
+        #     command = input()
+        #     continue
 
         merged = "".join(initial_input[start_idx:end_idx + 1])
         del initial_input[start_idx:end_idx + 1]
@@ -50,6 +50,4 @@ while command != "3:1":
     command = input()
 
 joined_list = " ".join(initial_input)
-
-if joined_list != "3 : 1":
-    print(joined_list)
+print(joined_list)
