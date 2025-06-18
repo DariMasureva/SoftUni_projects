@@ -1,53 +1,37 @@
-initial_input = input().split()
-command = input()
-
-while command != "3:1":
-    command = command.split()
-    length = len(initial_input)
-
-    if command[0] == "merge":
-        start_idx = int(command[1])
-        end_idx = int(command[2])
-
-        if start_idx < 0:
-            start_idx = max(length + start_idx, 0)
-        if end_idx < 0:
-            end_idx = max(length + end_idx, 0)
-
-        # if start_idx > length - 1:
-        #     command = input()
-        #     continue
-        # elif start_idx < - length:
-        #     start_idx = - length
-        #
-        # if end_idx > length - 1:
-        #     end_idx = length - 1
-        # elif end_idx < - length:
-        #     command = input()
-        #     continue
-
-        merged = "".join(initial_input[start_idx:end_idx + 1])
-        del initial_input[start_idx:end_idx + 1]
-        initial_input.insert(start_idx, merged)
-
-    elif command[0] == "divide":
-        partit_idx = int(command[1])
-        substr_count = int(command[2])
-        element_divided = initial_input.pop(partit_idx)
-        division_length = len(element_divided) // substr_count
-
-        for substr_num in range(substr_count):
-
-            if substr_num == substr_count - 1:
-                cur_partit = element_divided
+strings_input = input().split()
+result = []
+instructions = input()
+while not instructions == "3:1":
+    instructions = instructions.split()
+    command = instructions[0]
+    if command == 'merge':
+        start = int(instructions[1])
+        end = int(instructions[2])
+        if start < 0:
+            start = 0
+        if end > len(strings_input) - 1:
+            end = len(strings_input) - 1
+        for index, string in enumerate(strings_input):
+            if index in range(start + 1, end + 1):
+                strings_input[start] += strings_input[index]
+        for index in range(end, start, - 1):
+            strings_input.pop(index)
+    elif command == 'divide':
+        index = int(instructions[1])
+        partitions = int(instructions[2])
+        if partitions > len(strings_input[index]):
+            step = 1
+        else:
+            step = len(strings_input[index]) // partitions
+        divide_part = strings_input.pop(index)
+        start = 0
+        for parts in range(partitions):
+            if parts == partitions - 1:
+                strings_input.insert(index, divide_part[start::])
+                break
             else:
-                cur_partit = element_divided[:division_length]
-
-            element_divided = element_divided[division_length:]
-
-            initial_input.insert(partit_idx + substr_num, cur_partit)
-
-    command = input()
-
-joined_list = " ".join(initial_input)
-print(joined_list)
+                strings_input.insert(index, divide_part[start: start + step:])
+            start += step
+            index += 1
+    instructions = input()
+print(' '.join(strings_input))
