@@ -7,7 +7,8 @@ def change_case(username, lower_or_upper):
 
 
 def reverse(username, start, stop):
-    substr = username[stop:start - 1:-1]
+    substr = username[start:stop + 1]
+    substr = substr[::-1]
     return substr
 
 
