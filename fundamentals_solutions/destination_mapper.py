@@ -1,27 +1,38 @@
 def separate_destinations(string_given):
-    first_equal_found = False
-    first_slash_found = False
+    equal_expected = False
+    slash_expected = False
+    expected_symbol_idx = 0
     destination_list = []
-    cur_destination = ""
 
-    for symbol in string_given:
+    for idx, symbol in enumerate(string_given):
 
-        if (first_slash_found and symbol != "/") or (first_equal_found and symbol != "="):
-            cur_destination += symbol
+        if symbol == "=" and not slash_expected and not equal_expected:
+            expected_symbol_idx = idx + 1
+            equal_expected = True
 
-        if symbol == "=" and not first_equal_found and not first_slash_found:
-            first_equal_found = True
-        elif symbol == "=" and first_equal_found and cur_destination:
-            first_equal_found = False
+        elif symbol == "=" and slash_expected:
+            slash_expected = False
+            equal_expected = True
+            expected_symbol_idx = idx + 1
+            
+        elif symbol == "=" and equal_expected:
+            cur_destination = string_given[expected_symbol_idx:idx]
             destination_list.append(cur_destination)
-            cur_destination = ""
+            expected_symbol_idx = idx + 1
 
-        elif symbol == "/" and not first_slash_found and not first_equal_found:
-            first_slash_found = True
-        elif symbol == "/" and first_slash_found and cur_destination:
-            first_slash_found = False
+        if symbol == "/" and not slash_expected and not equal_expected:
+            expected_symbol_idx = idx + 1
+            slash_expected = True
+
+        elif symbol == "/" and equal_expected:
+            equal_expected = False
+            slash_expected = True
+            expected_symbol_idx = idx + 1
+
+        elif symbol == "/" and slash_expected:
+            cur_destination = string_given[expected_symbol_idx:idx]
             destination_list.append(cur_destination)
-            cur_destination = ""
+            expected_symbol_idx = idx + 1
 
     return destination_list
 
