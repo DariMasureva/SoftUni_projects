@@ -15,4 +15,3 @@ class Catalogue:
         sorted_products = sorted(self.products)
         return f"Items in the {self.name} catalogue: \n" + '\n'.join(sorted_products)
 
-
