@@ -34,31 +34,44 @@ def start_paths(board:list, position:tuple):
 
     return paths_found
 
+def find_kates_pos(board:list):
+    kates_pos = (0,0)
+    for idx, row in enumerate(board):
+        if "k" in row:
+            kates_pos = (row.index("k"), idx)
+            break
+
+    return kates_pos
+
+def validate_paths(list_of_paths, board:list):
+    valid_paths_list = []
+
+    for cur_path in list_of_paths:
+        x_ = cur_path[-1][0]
+        y_ = cur_path[-1][1]
+
+        if x_ == 0 or x_ == len(board[0]) - 1 or y_ == 0 or y_ == rows - 1:
+            valid_paths_list.append(cur_path)
+
+    return valid_paths_list
+
+
+def find_longest_path(valid_paths_list):
+    if not valid_paths_list:
+        return "Kate cannot get out"
+    else:
+        longest_path = len(max(valid_paths_list, key=len)) + 1
+        return f"Kate got out in {longest_path} moves"
+
+
 #starting info
 rows = int(input())
 field = [input() for _ in range(rows)]
 
-#finding kates position
-for idx, row in enumerate(field):
-    if "k" in row:
-        kates_position = (row.index("k"), idx)
-        break
-
-#determining number of paths and the start coords
-path_starts_ = start_paths(field, kates_position)
-
+kates_position = find_kates_pos(field)
+path_starts_ = start_paths(field, kates_position) #determining number of paths and the start coords
 path_list = path_continue(field, path_starts_)
-valid_paths = []
+valid_paths = validate_paths(path_list, field)
 
-for cur_path in path_list:
-    x_ = cur_path[-1][0]
-    y_ = cur_path[-1][1]
+print(find_longest_path(valid_paths))
 
-    if x_ == 0 or x_ == len(field[0]) - 1 or y_ == 0 or y_ == rows - 1:
-        valid_paths.append(cur_path)
-
-if not valid_paths:
-    print("Kate cannot get out")
-else:
-    longest_path = len(max(valid_paths, key=len)) + 1
-    print(f"Kate got out in {longest_path} moves")
