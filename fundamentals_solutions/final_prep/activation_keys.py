@@ -1,5 +1,4 @@
 activation_key = input()
-case_types = {"Lower": lower(), }
 
 while (command := input()) != "Generate":
     command_parts = command.split(">>>")
